@@ -3,22 +3,21 @@ if exists('g:loaded_stripper') || &cp
 endif
 let g:loaded_stripper = 1
 
+" Don't strip whitespace on these filetypes
+if ! exists('g:StripperIgnoreFileTypes')
+  let g:StripperIgnoreFileTypes = ['markdown', 'liquid']
+endif
+
 augroup stripper
   " Strip trailing whitespace before saving
-  autocmd BufWritePre * call s:stripTrailingWhiteSpace()
+  autocmd BufWritePre * Stripper
 augroup END
 
 " Strip trailing white space
-function! s:stripTrailingWhiteSpace()
-  if ! exists('g:noStripTrailingWhiteSpace')
-    " Markdown uses trailing whitespace, so don't do it if we're editing markdown
-    if &ft !~# '^\%(markdown\|liquid\)$'
-      :%s/\s\+$//e
-    endif
+function! Stripper#strip(line1, line2)
+  if ! exists('g:noStripTrailingWhiteSpace') && index(g:StripperIgnoreFileTypes, &ft) < 0
+    execute ':'. a:line1 .','. a:line2 . 's/\s\+$//e'
   endif
 endfunction
 
-" TODO: make a vim function for this that takes a range
-"function! StripWhiteSpace()
-"  call s:stripTrailingWhiteSpace()
-"endfunction
+command! -nargs=? -range=% Stripper :call Stripper#strip(<line1>, <line2>)
