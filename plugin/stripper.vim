@@ -8,15 +8,19 @@ if ! exists('g:StripperIgnoreFileTypes')
   let g:StripperIgnoreFileTypes = ['markdown', 'liquid']
 endif
 
-augroup stripper
-  " Strip trailing whitespace before saving
-  autocmd BufWritePre * Stripper
-augroup END
+" Strip trailing whitespace before saving
+autocmd BufWritePre * call Stripper#strip_on_save()
 
 " Strip trailing white space
 function! Stripper#strip(line1, line2)
-  if ! exists('g:noStripTrailingWhiteSpace') && index(g:StripperIgnoreFileTypes, &ft) < 0
+  if index(g:StripperIgnoreFileTypes, &ft) < 0
     execute ':'. a:line1 .','. a:line2 . 's/\s\+$//e'
+  endif
+endfunction
+
+function! Stripper#strip_on_save()
+  if ! exists('g:StripperNoStripOnSave')
+    execute ':Stripper'
   endif
 endfunction
 
