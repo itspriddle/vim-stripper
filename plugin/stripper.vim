@@ -9,6 +9,11 @@ if exists('g:loaded_stripper') || &cp
 endif
 let g:loaded_stripper = 1
 
+" Disable strip-on-save the following env variable is set
+if $VIM_STRIPPER_NO_STRIP_ON_SAVE
+  let g:StripperNoStripOnSave = 1
+endif
+
 " Sometimes whitespace isn't evil, such as with markdown.
 " Don't strip whitespace on such filetypes when stripping-on-save
 if ! exists('g:StripperIgnoreFileTypes')
