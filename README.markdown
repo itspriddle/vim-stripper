@@ -24,4 +24,4 @@ You can also strip whitespace on selected text in visual mode.
 
 ## License
 
-MIT License, see `LICENSE` in this repo.
+Same as Vim itself, see `:help license`.
