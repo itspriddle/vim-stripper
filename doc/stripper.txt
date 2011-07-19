@@ -1,0 +1,43 @@
+*stripper.vim*  It won't get naked for you, but it will strip trailing whitespace.
+
+Author: Joshua Priddle <jpriddle@nevercraft.net> *stripper-author*
+License: Same terms as Vim itself (see |license|)
+
+==============================================================================
+INTRODUCTION                                    *stripper*
+
+stripper.vim adds the |:Stripper| command, which will strip trailing
+whitespace from your files. By default, all files but Markdown and Liquid are
+stripped when a buffer is saved. This behavior is configurable, see
+|stripper-configuration| for more info.
+
+==============================================================================
+CONFIGURATION                                   *stripper-configuration*
+
+stripper.vim has two configuration options:
+
+  - Disable strip-on-save: >
+    let g:StripperNoStripOnSave = 1
+<
+  - Filetypes to ignore with strip-on-save: >
+    let g:StripperIgnoreFileTypes = [ 'markdown', 'liquid', 'txt', 'my_ft' ]
+<
+
+Tip: to disable stripper.vim in a single project, enable |exrc| ~/.vimrc and
+create a second .vimrc file in your project with the disable option above.
+
+==============================================================================
+COMMANDS                                        *stripper-commands*
+
+                                                *stripper-:Stripper*
+:[range]Stripper        Strip trailing whitespace
+
+==============================================================================
+ABOUT                                           *stripper-about*
+
+Grab the latest version or report a bug on Github:
+
+https://github.com/itspriddle/vim-stripper
+
+==============================================================================
+ vim:tw=78:et:ft=help:norl:

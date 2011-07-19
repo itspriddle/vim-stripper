@@ -1,18 +1,13 @@
 " stripper.vim
 " Author:  Joshua Priddle <jpriddle@nevercraft.net>
 " URL:     https://github.com/itspriddle/vim-stripper
-" Version: 0.0.0
-" License: MIT
+" Version: 0.1.0
+" License: Same as Vim itself (see :help license)
 
 if exists('g:loaded_stripper') || &cp
   finish
 endif
 let g:loaded_stripper = 1
-
-" Disable strip-on-save the following env variable is set
-if $VIM_STRIPPER_NO_STRIP_ON_SAVE
-  let g:StripperNoStripOnSave = 1
-endif
 
 " Sometimes whitespace isn't evil, such as with markdown.
 " Don't strip whitespace on such filetypes when stripping-on-save
@@ -22,7 +17,7 @@ endif
 
 " Strip trailing whitespace
 function! Stripper#strip(line1, line2)
-  execute ':'. a:line1 .','. a:line2 . 's/\s\+$//e'
+  execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//e'
 endfunction
 
 " Used to strip whitespace when a buffer is saved. This checks that the
