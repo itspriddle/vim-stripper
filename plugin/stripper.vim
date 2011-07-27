@@ -1,7 +1,7 @@
 " stripper.vim
 " Author:  Joshua Priddle <jpriddle@nevercraft.net>
 " URL:     https://github.com/itspriddle/vim-stripper
-" Version: 0.1.0
+" Version: 0.1.1
 " License: Same as Vim itself (see :help license)
 
 if exists('g:loaded_stripper') || &cp
@@ -16,7 +16,7 @@ if ! exists('g:StripperIgnoreFileTypes')
 endif
 
 " Strip trailing whitespace
-function! Stripper#strip(line1, line2)
+function! stripper#strip(line1, line2)
   execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//e'
 endfunction
 
@@ -25,17 +25,17 @@ endfunction
 " add the following to .vimrc:
 "
 "     let g:StripperNoStripOnSave = 1
-function! Stripper#strip_on_save()
+function! stripper#strip_on_save()
   if ! exists('g:StripperNoStripOnSave') && index(g:StripperIgnoreFileTypes, &ft) < 0
     execute ':Stripper'
   endif
 endfunction
 
 " Register :Stripper as a vim command
-command! -nargs=? -range=% Stripper :call Stripper#strip(<line1>, <line2>)
+command! -range=% Stripper :call stripper#strip(<line1>, <line2>)
 
 " Setup autocmds to strip whitespace when a buffer is saved
 augroup Stripper
   autocmd!
-  autocmd BufWritePre * call Stripper#strip_on_save()
+  autocmd BufWritePre * call stripper#strip_on_save()
 augroup END
