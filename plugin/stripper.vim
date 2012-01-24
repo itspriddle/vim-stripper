@@ -17,7 +17,11 @@ endif
 
 " Strip trailing whitespace
 function! stripper#strip(line1, line2)
+  let position = getpos('.')
+  let search   = getreg('/')
   execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//e'
+  call setpos('.', position)
+  call setreg('/', search)
 endfunction
 
 " Used to strip whitespace when a buffer is saved. This checks that the
