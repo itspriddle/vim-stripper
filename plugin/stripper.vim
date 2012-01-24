@@ -1,7 +1,7 @@
 " stripper.vim
-" Author:  Joshua Priddle <jpriddle@nevercraft.net>
+" Author:  Joshua Priddle <jpriddle@me.com>
 " URL:     https://github.com/itspriddle/vim-stripper
-" Version: 0.1.1
+" Version: 0.2.0
 " License: Same as Vim itself (see :help license)
 
 if exists('g:loaded_stripper') || &cp
