@@ -16,7 +16,7 @@ if ! exists('g:StripperIgnoreFileTypes')
 endif
 
 " Strip trailing whitespace
-function! stripper#strip(line1, line2)
+function! s:strip(line1, line2)
   let position = getpos('.')
   let search   = getreg('/')
   execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//e'
@@ -29,17 +29,17 @@ endfunction
 " add the following to .vimrc:
 "
 "     let g:StripperNoStripOnSave = 1
-function! stripper#strip_on_save()
+function! s:strip_on_save()
   if ! exists('g:StripperNoStripOnSave') && index(g:StripperIgnoreFileTypes, &ft) < 0
     execute ':Stripper'
   endif
 endfunction
 
 " Register :Stripper as a vim command
-command! -range=% Stripper :call stripper#strip(<line1>, <line2>)
+command! -range=% Stripper :call <SID>strip(<line1>, <line2>)
 
 " Setup autocmds to strip whitespace when a buffer is saved
 augroup Stripper
   autocmd!
-  autocmd BufWritePre * call stripper#strip_on_save()
+  autocmd BufWritePre * call <SID>strip_on_save()
 augroup END
