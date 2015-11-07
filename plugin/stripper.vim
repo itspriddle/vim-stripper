@@ -17,11 +17,17 @@ endif
 
 " Strip trailing whitespace
 function! s:strip(line1, line2)
-  let position = getpos('.')
-  let search   = getreg('/')
-  execute ':' . a:line1 . ',' . a:line2 . 's/\s\+$//e'
-  call setpos('.', position)
-  call setreg('/', search)
+  let strip_command = a:line1 . ',' . a:line2 . 's/\s\+$//e'
+
+  if exists(':keeppatterns')
+    execute 'keeppatterns ' strip_command
+  else
+    let position = getpos('.')
+    let search   = getreg('/')
+    execute strip_command
+    call setpos('.', position)
+    call setreg('/', search)
+  endif
 endfunction
 
 " Used to strip whitespace when a buffer is saved. This checks that the
