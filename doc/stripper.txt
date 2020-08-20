@@ -14,7 +14,7 @@ stripped when a buffer is saved. This behavior is configurable, see
 ==============================================================================
 CONFIGURATION                                   *stripper-configuration*
 
-stripper.vim has two configuration options:
+stripper.vim has two global configuration options:
 
   - Disable strip-on-save: >
     let g:StripperNoStripOnSave = 1
@@ -23,8 +23,15 @@ stripper.vim has two configuration options:
     let g:StripperIgnoreFileTypes = [ 'markdown', 'liquid', 'txt', 'my_ft' ]
 <
 
-Tip: to disable stripper.vim in a single project, enable |exrc| ~/.vimrc and
-create a second .vimrc file in your project with the disable option above.
+Stripping trailing whitespace when a buffer is saved can also be configured
+per-buffer. For example, in an |after-directory| |ftplugin| such as
+`after/ftplugin/markdown.vim`:
+
+>
+    if expand('%:p:h:t') == 'blog'
+      let b:StripperStripOnSave = 1
+    endif
+<
 
 ==============================================================================
 COMMANDS                                        *stripper-commands*
