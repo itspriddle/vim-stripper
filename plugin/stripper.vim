@@ -19,6 +19,8 @@ endif
 function! s:strip(line1, line2)
   let strip_command = a:line1 . ',' . a:line2 . 's/\s\+$//e'
 
+  let view = winsaveview()
+
   if exists(':keeppatterns')
     execute 'keeppatterns ' strip_command
   else
@@ -28,6 +30,8 @@ function! s:strip(line1, line2)
     call setpos('.', position)
     call setreg('/', search)
   endif
+
+  call winrestview(view)
 endfunction
 
 " Used to strip whitespace when a buffer is saved. This checks that the
