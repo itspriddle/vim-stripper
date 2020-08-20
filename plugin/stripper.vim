@@ -22,7 +22,7 @@ function! s:strip(line1, line2)
   let view = winsaveview()
 
   if exists(':keeppatterns')
-    execute 'keeppatterns ' strip_command
+    execute 'keepjumps keeppatterns ' strip_command
   else
     let position = getpos('.')
     let search   = getreg('/')
