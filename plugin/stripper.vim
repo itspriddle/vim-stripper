@@ -39,8 +39,13 @@ endfunction
 " add the following to .vimrc:
 "
 "     let g:StripperNoStripOnSave = 1
+"
+" To opt-in per-buffer, set b:StripperStripOnSave. For example, in
+" after/plugin/markdown.vim:
+"
+"     let b:StripperStripOnSave = 1
 function! s:strip_on_save()
-  if ! exists('g:StripperNoStripOnSave') && index(g:StripperIgnoreFileTypes, &ft) < 0
+  if ! exists('g:StripperNoStripOnSave') && index(g:StripperIgnoreFileTypes, &ft) < 0 || get(b:, 'StripperStripOnSave', 0)
     execute ':Stripper'
   endif
 endfunction
