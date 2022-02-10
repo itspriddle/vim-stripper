@@ -12,7 +12,7 @@ let g:loaded_stripper = 1
 " Sometimes whitespace isn't evil, such as with markdown.
 " Don't strip whitespace on such filetypes when stripping-on-save
 if ! exists('g:StripperIgnoreFileTypes')
-  let g:StripperIgnoreFileTypes = ['markdown', 'liquid']
+  let g:StripperIgnoreFileTypes = ['markdown', 'liquid', 'rmd']
 endif
 
 " Strip trailing whitespace
